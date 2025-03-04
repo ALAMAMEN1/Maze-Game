@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Wall_Small_Roofgap_2_0: 768448077614130046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

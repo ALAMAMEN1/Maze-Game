@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Stairs_Inverted_1_0: -9037491539059791039
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
