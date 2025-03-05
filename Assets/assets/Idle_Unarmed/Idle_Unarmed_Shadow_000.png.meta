@@ -522,7 +522,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Idle_Unarmed_Shadow_000_0: 176520137731703170
+      Idle_Unarmed_Shadow_000_1: 7402898278525406138
+      Idle_Unarmed_Shadow_000_10: 8753949425191747450
+      Idle_Unarmed_Shadow_000_11: -1853081278584805569
+      Idle_Unarmed_Shadow_000_12: 3802942102851978846
+      Idle_Unarmed_Shadow_000_13: 8684887794585653265
+      Idle_Unarmed_Shadow_000_14: -4089337204776460068
+      Idle_Unarmed_Shadow_000_15: 1977486221800833092
+      Idle_Unarmed_Shadow_000_2: -3753451615164110052
+      Idle_Unarmed_Shadow_000_3: 4618221408713248492
+      Idle_Unarmed_Shadow_000_4: -1735516748220778404
+      Idle_Unarmed_Shadow_000_5: -7284191886418757404
+      Idle_Unarmed_Shadow_000_6: 3874602390526036
+      Idle_Unarmed_Shadow_000_7: -5994519804579469839
+      Idle_Unarmed_Shadow_000_8: 8852127896806249577
+      Idle_Unarmed_Shadow_000_9: -6537780692270679512
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
