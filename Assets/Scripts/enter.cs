@@ -12,7 +12,7 @@ public class enter : MonoBehaviour
     //public AudioSource audioSource; 
     public bool isEnter;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
         isEnter = true; 
