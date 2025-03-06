@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Run_Unarmed_Shadow_247_0: 6693213275007682453
+      Run_Unarmed_Shadow_247_1: 4976872651696688083
+      Run_Unarmed_Shadow_247_10: 7568451614284937679
+      Run_Unarmed_Shadow_247_11: -5673269531756998866
+      Run_Unarmed_Shadow_247_12: -2354275716643421148
+      Run_Unarmed_Shadow_247_13: -2123920914366947983
+      Run_Unarmed_Shadow_247_14: -5731369656753213682
+      Run_Unarmed_Shadow_247_15: 5308735083737510745
+      Run_Unarmed_Shadow_247_16: 8994945312900815378
+      Run_Unarmed_Shadow_247_17: -1182253166316128296
+      Run_Unarmed_Shadow_247_18: 8152466280870156510
+      Run_Unarmed_Shadow_247_19: 2755869124521173198
+      Run_Unarmed_Shadow_247_2: -6733028670434760368
+      Run_Unarmed_Shadow_247_3: -303118205748744076
+      Run_Unarmed_Shadow_247_4: 2847238317132527204
+      Run_Unarmed_Shadow_247_5: -7686727910518349734
+      Run_Unarmed_Shadow_247_6: -3556721751972595154
+      Run_Unarmed_Shadow_247_7: 4528167939909886673
+      Run_Unarmed_Shadow_247_8: 2958881738142101770
+      Run_Unarmed_Shadow_247_9: 7849296040271881157
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

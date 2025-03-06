@@ -622,7 +622,27 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Run_Unarmed_Body_270_0: -3755179581062674839
+      Run_Unarmed_Body_270_1: -1156043952307066732
+      Run_Unarmed_Body_270_10: -1889873987301010431
+      Run_Unarmed_Body_270_11: -2220107056071039690
+      Run_Unarmed_Body_270_12: 5362336466053439903
+      Run_Unarmed_Body_270_13: -6840883688873894453
+      Run_Unarmed_Body_270_14: 4088857800267647438
+      Run_Unarmed_Body_270_15: 4812239193906436567
+      Run_Unarmed_Body_270_16: 8521140782413260685
+      Run_Unarmed_Body_270_17: -7338278334061858119
+      Run_Unarmed_Body_270_18: -7790429949574180458
+      Run_Unarmed_Body_270_19: 2397627287621556882
+      Run_Unarmed_Body_270_2: -4342273711048084889
+      Run_Unarmed_Body_270_3: 6705872915444785874
+      Run_Unarmed_Body_270_4: 372661214411314294
+      Run_Unarmed_Body_270_5: -73328550569165438
+      Run_Unarmed_Body_270_6: 2224633772990880060
+      Run_Unarmed_Body_270_7: 852947618043094031
+      Run_Unarmed_Body_270_8: 8680087081240448654
+      Run_Unarmed_Body_270_9: -6404588412820591888
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
