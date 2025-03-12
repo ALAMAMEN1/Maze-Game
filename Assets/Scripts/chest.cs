@@ -11,6 +11,7 @@ public class Chest : MonoBehaviour
     public bool isEnter;
     public Animator animator;
     public Animator keyAnimator;
+    public Player player;
 
     // Start is called once before the first execution of Update after the MonoBehavior is created
    void Start()
@@ -18,28 +19,37 @@ public class Chest : MonoBehaviour
         isEnter = true; 
         text.SetActive(false);
         key.SetActive(false);
-        Debug.Log("Key should be hidden: " + key.activeSelf); // تحقق من حالة المفتاح
+        Debug.Log("Key should be hidden: " + key.activeSelf);
         animator.SetBool("isOpen", isOpen);
+        
+    
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        
+
+
         if (isEnter)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
+            if (Input.GetKeyDown(KeyCode.E)){
+                
                 //audioSource.Play();
                 isEnter = false;
                 isOpen = true;
                 animator.SetBool("isOpen", isOpen);
                 key.SetActive(true);
                 keyAnimator.SetBool("play",true);
+                key.SetActive(false);
+                player.key = true;
             }
         }
         
     }
-    private void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
