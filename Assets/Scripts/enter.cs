@@ -7,16 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class enter : MonoBehaviour
 {
-    public GameObject text;
-    public GameObject isTrigger;
+        public GameObject isTrigger;
     //public AudioSource audioSource; 
     public bool isEnter;
 
     // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
-        isEnter = true; 
-        text.SetActive(false);
+        isEnter = false; 
     }
 
     // Update is called once per frame
@@ -24,9 +22,8 @@ public class enter : MonoBehaviour
     {
         if (isEnter)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Debug.Log("E key was pressed."); 
+           
+                 
                 isTrigger.SetActive(false);
                 //audioSource.Play();
                 isEnter = false;
@@ -40,7 +37,7 @@ public class enter : MonoBehaviour
                 {
                     Debug.Log("No more scenes to load.");
                 }
-            }
+            
         }
     }
 
@@ -48,7 +45,6 @@ public class enter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            text.SetActive(true);
             isEnter = true;
         }
     }
@@ -57,7 +53,6 @@ public class enter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            text.SetActive(false);
             isEnter = false;
         }
     }

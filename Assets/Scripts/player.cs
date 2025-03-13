@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -7,15 +6,13 @@ public class Player : MonoBehaviour
     public float speed;
     float speedX, speedY;
     Rigidbody2D rb;
-
     Animator animator;
-
-
     bool facingRight = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        key = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -26,24 +23,21 @@ public class Player : MonoBehaviour
         speedX = Input.GetAxis("Horizontal");
         speedY = Input.GetAxis("Vertical");
         if(speedX != 0 || speedY != 0){
-            animator.SetBool("run",true);
-        }else{
-            animator.SetBool("run" , false);
+            animator.SetBool("run", true);
+        } else {
+            animator.SetBool("run", false);
         }
-
 
         if(speedX < 0 && facingRight){
             Flip();
-        }else if(speedX > 0 && !facingRight){
+        } else if(speedX > 0 && !facingRight){
             Flip();
         }
         rb.linearVelocity = new Vector2(speedX * speed, speedY * speed);
     }
 
-
-
-
-    void Flip(){
+    void Flip()
+    {
         facingRight = !facingRight;
         Vector3 scale = transform.localScale;
         scale.x *= -1;

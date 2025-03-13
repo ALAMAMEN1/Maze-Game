@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections; // Add this line to include the IEnumerator type
 
 public class Chest : MonoBehaviour
 {
@@ -17,9 +17,10 @@ public class Chest : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        key.SetActive(false);
         isEnter = true; 
         text.SetActive(false);
+        key.SetActive(false);
+        Debug.Log("Key should be hidden: " + key.activeSelf);
         animator.SetBool("isOpen", isOpen);
     }
 
