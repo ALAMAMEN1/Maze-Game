@@ -31,7 +31,7 @@ public class Open : MonoBehaviour
     private IEnumerator OpenDoor()
     {
         doorAnimator.SetBool("open", true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.6f);
         doorAnimator.SetBool("open", false);
         collider.isTrigger = true;
         trigger.SetActive(false);

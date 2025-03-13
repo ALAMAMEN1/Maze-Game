@@ -20,7 +20,6 @@ public class Chest : MonoBehaviour
         isEnter = true; 
         text.SetActive(false);
         key.SetActive(false);
-        Debug.Log("Key should be hidden: " + key.activeSelf);
         animator.SetBool("isOpen", isOpen);
     }
 
@@ -45,7 +44,7 @@ public class Chest : MonoBehaviour
 
     private IEnumerator DeactivateKeyWithDelay()
     {
-        yield return new WaitForSeconds(1.5f); // Adjust the delay time as needed
+        yield return new WaitForSeconds(2f);
         key.SetActive(false);
     }
 
