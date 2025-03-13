@@ -36,6 +36,16 @@ public class Player : MonoBehaviour
         } else if(speedX > 0 && !facingRight){
             Flip();
         }
+
+
+        if(health == 0) {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            
+        }
+
+
+
         rb.linearVelocity = new Vector2(speedX * speed, speedY * speed);
     }
 
