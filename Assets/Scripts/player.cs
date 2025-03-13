@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public float MAX_HEALTH;
+    public float health;
     public bool key = false;
     public float speed;
     float speedX, speedY;
@@ -12,6 +14,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        health = MAX_HEALTH;
         key = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -42,5 +45,10 @@ public class Player : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+
+     public WaitForSeconds stop(){
+         return new WaitForSeconds(2f);
     }
 }

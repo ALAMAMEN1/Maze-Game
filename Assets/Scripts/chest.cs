@@ -14,7 +14,7 @@ public class Chest : MonoBehaviour
     public Animator keyAnimator;
     public Player player;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
         isEnter = true; 

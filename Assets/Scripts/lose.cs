@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class Lose : MonoBehaviour
 {
     public GameObject isTrigger;
+ 
     //public AudioSource audioSource; 
     public bool isEnter;
 
