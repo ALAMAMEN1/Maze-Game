@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+
 
 public class Player : MonoBehaviour
 {
@@ -13,12 +15,23 @@ public class Player : MonoBehaviour
     public bool stop = false;
     bool facingRight = true;
 
+
+    public GameObject sowrd;
+
+    public GameObject eff;
+    public Animator sowrdAnimator;
+
+
+    public Animator effAnimator;
+
     void Start()
     {
         health = MAX_HEALTH;
         key = false;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sowrd.SetActive(false);
+        eff.SetActive(false);
     }
 
     void Update()
@@ -54,7 +67,24 @@ public class Player : MonoBehaviour
             rb.linearVelocity = new Vector2(speedX * speed, speedY * speed);
         }
 
+
+        if(Input.GetKeyDown(KeyCode.F)) {
+            sowrd.SetActive(true);
+            eff.SetActive(true);
+            sowrdAnimator.SetBool("play" , true);
+            effAnimator.SetBool("play" , true);
+            StartCoroutine(DeactivateAttWithDelay());
+        }
+
               
+    }
+
+
+    private IEnumerator DeactivateAttWithDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        sowrd.SetActive(false);
+        eff.SetActive(false);
     }
 
     void Flip()
