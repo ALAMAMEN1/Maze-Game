@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
         speedX = Input.GetAxis("Horizontal");
         speedY = Input.GetAxis("Vertical");
 
-        // التحكم في animation الجري
         if (speedX != 0 || speedY != 0)
         {
             animator.SetBool("run", true);
@@ -36,7 +35,6 @@ public class Player : MonoBehaviour
             animator.SetBool("run", false);
         }
 
-        // قلب اتجاه اللاعب
         if (speedX < 0 && facingRight)
         {
             Flip();
@@ -46,13 +44,11 @@ public class Player : MonoBehaviour
             Flip();
         }
 
-        // إعادة تحميل المشهد إذا انتهت حياة اللاعب
-        if (health <= 0) // استخدام <= بدلاً من ==
+        if (health <= 0) 
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        // تحريك اللاعب إذا لم يكن متوقفًا
         if (!stop)
         {
             rb.linearVelocity = new Vector2(speedX * speed, speedY * speed);

@@ -8,7 +8,7 @@ public class Chest : MonoBehaviour
     public GameObject key;
 
     public GameObject triggerObject;
-    public AudioSource audioSource; // أزل التعليق إذا كنت تريد استخدام الصوت
+    public AudioSource audioSource;       
     public bool isEnter = false;
     public Animator animator;
     public Animator keyAnimator;
@@ -31,12 +31,11 @@ public class Chest : MonoBehaviour
 
     private void OpenChest()
     {
-        if (!isOpen) // التأكد من أن الصندوق لم يتم فتحه بالفعل
+        if (!isOpen)
         {
             isOpen = true;
             animator.SetBool("isOpen", isOpen);
 
-            // تشغيل الصوت (إذا كان audioSource معينًا)
             if (audioSource != null)
             {
                 audioSource.Play();
@@ -46,7 +45,7 @@ public class Chest : MonoBehaviour
             keyAnimator.SetBool("play", true);
             StartCoroutine(DeactivateKeyWithDelay());
 
-            player.key = true; // إعطاء المفتاح للاعب
+            player.key = true; 
             isEnter = false;
         }
     }
