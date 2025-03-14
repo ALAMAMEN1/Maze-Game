@@ -10,16 +10,18 @@ public class Open : MonoBehaviour
     public Player player;
     
     BoxCollider2D collider;
+    bool isEnter;
 
     void Start()
     {
+        isEnter = false;
         collider = door.GetComponent<BoxCollider2D>();
         text.SetActive(false);
     }
 
     void Update()
     {
-        if(player.key)
+        if(player.key && isEnter)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -41,6 +43,7 @@ public class Open : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isEnter = true;
             text.SetActive(true);
         }
     }
@@ -49,6 +52,7 @@ public class Open : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            isEnter = false;
             text.SetActive(false);
         }
     }

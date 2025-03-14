@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -9,9 +10,9 @@ public class Player : MonoBehaviour
     float speedX, speedY;
     Rigidbody2D rb;
     Animator animator;
+    public bool stop = false;
     bool facingRight = true;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         health = MAX_HEALTH;
@@ -20,33 +21,44 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         speedX = Input.GetAxis("Horizontal");
         speedY = Input.GetAxis("Vertical");
-        if(speedX != 0 || speedY != 0){
+
+        // التحكم في animation الجري
+        if (speedX != 0 || speedY != 0)
+        {
             animator.SetBool("run", true);
-        } else {
+        }
+        else
+        {
             animator.SetBool("run", false);
         }
 
-        if(speedX < 0 && facingRight){
+        // قلب اتجاه اللاعب
+        if (speedX < 0 && facingRight)
+        {
             Flip();
-        } else if(speedX > 0 && !facingRight){
+        }
+        else if (speedX > 0 && !facingRight)
+        {
             Flip();
         }
 
-
-        if(health == 0) {
-
+        // إعادة تحميل المشهد إذا انتهت حياة اللاعب
+        if (health <= 0) // استخدام <= بدلاً من ==
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            
         }
 
+        // تحريك اللاعب إذا لم يكن متوقفًا
+        if (!stop)
+        {
+            rb.linearVelocity = new Vector2(speedX * speed, speedY * speed);
+        }
 
-
-        rb.linearVelocity = new Vector2(speedX * speed, speedY * speed);
+              
     }
 
     void Flip()
@@ -57,8 +69,5 @@ public class Player : MonoBehaviour
         transform.localScale = scale;
     }
 
-
-     public WaitForSeconds stop(){
-         return new WaitForSeconds(2f);
-    }
+    
 }

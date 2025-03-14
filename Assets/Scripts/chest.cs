@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections; // Add this line to include the IEnumerator type
+using System.Collections;
 
 public class Chest : MonoBehaviour
 {
@@ -8,37 +8,46 @@ public class Chest : MonoBehaviour
     public GameObject key;
 
     public GameObject triggerObject;
-    //public AudioSource audioSource; 
-    public bool isEnter;
+    public AudioSource audioSource; // أزل التعليق إذا كنت تريد استخدام الصوت
+    public bool isEnter = false;
     public Animator animator;
     public Animator keyAnimator;
     public Player player;
 
-    // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
-        isEnter = true; 
         text.SetActive(false);
         key.SetActive(false);
         animator.SetBool("isOpen", isOpen);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isEnter)
+        if (isEnter && Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            OpenChest();
+        }
+    }
+
+    private void OpenChest()
+    {
+        if (!isOpen) // التأكد من أن الصندوق لم يتم فتحه بالفعل
+        {
+            isOpen = true;
+            animator.SetBool("isOpen", isOpen);
+
+            // تشغيل الصوت (إذا كان audioSource معينًا)
+            if (audioSource != null)
             {
-                //audioSource.Play();
-                isEnter = false;
-                isOpen = true;
-                animator.SetBool("isOpen", isOpen);
-                key.SetActive(true);
-                keyAnimator.SetBool("play", true);
-                StartCoroutine(DeactivateKeyWithDelay());
-                player.key = true;
+                audioSource.Play();
             }
+
+            key.SetActive(true);
+            keyAnimator.SetBool("play", true);
+            StartCoroutine(DeactivateKeyWithDelay());
+
+            player.key = true; // إعطاء المفتاح للاعب
+            isEnter = false;
         }
     }
 
@@ -50,18 +59,16 @@ public class Chest : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        Debug.Log("trigger");
+        if (other.gameObject.tag == "Player")
         {
-            text.SetActive(true);
             isEnter = true;
         }
     }
-
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.tag == "Player")
         {
-            text.SetActive(false);
             isEnter = false;
         }
     }
