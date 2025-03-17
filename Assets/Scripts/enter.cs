@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class enter : MonoBehaviour
 {
-        public GameObject isTrigger;
+    public GameObject isTrigger;
+
     //public AudioSource audioSource; 
     public bool isEnter;
 

@@ -30,12 +30,11 @@ public class Lose : MonoBehaviour
     {
         if (isEnter)
         {
-            rigdbody2D.linearVelocity = new UnityEngine.Vector2(-10,0);
-
+            rigdbody2D.linearVelocity = new UnityEngine.Vector2(-0.2f, 0);
             spriteRender.color = new Color(1f, 0.325f, 0.325f);
             player.health -= 2;
-            StopMove(1f);
             isEnter = false;
+            StartCoroutine(StopMove(1f));
         }
        
     }
@@ -64,13 +63,10 @@ public class Lose : MonoBehaviour
     {
         
             player.stop = true;
-            Debug.Log("Player Stopped!");
-            rigdbody2D.linearVelocity = UnityEngine.Vector2.zero;
+            Debug.Log("Player Stopped!");            
             yield return new WaitForSeconds(time);
-            spriteRender.color = new Color(0f, 0f, 0f);
-            player.stop = false;
-            isEnter = false;
-        
+            spriteRender.color = new Color(1f, 1f, 1f);
+            player.stop = false;        
     }
 
 
