@@ -17,25 +17,25 @@ public class playerHit : MonoBehaviour
         if(isEnter) {
             spriteRender.color = new Color(1f, 0.325f, 0.325f);
             isEnter = false;
-            StartCoroutine(StopMove(1f));
+            StartCoroutine(StopTime(1f));
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Enemy") {
+        if (other.CompareTag("Enemy")) {
             isEnter = true;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Enemy") {
+        if (other.CompareTag("Enemy")) {
             isEnter = false;
         }
     }
 
 
-    public IEnumerator StopMove(float time)
+    public IEnumerator StopTime(float time)
     {
             yield return new WaitForSeconds(time);
             player.health -= 20;

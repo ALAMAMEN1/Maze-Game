@@ -42,14 +42,14 @@ public class Lose : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("trigger");
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             isEnter = true;
         }
     }
     private void OnTriggerExit2D(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             isEnter = false;
             isTrigger.SetActive(false);

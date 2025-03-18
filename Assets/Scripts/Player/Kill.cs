@@ -27,14 +27,14 @@ public class Kill : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Enemy"){
+        if (other.CompareTag("Enemy")){
             isEnter = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Enemy"){
+        if (other.CompareTag("Enemy")){
             isEnter = false;
         }
     }

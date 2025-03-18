@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
     public GameObject player;
 
     public float speed;
-
-
+    public float dis;
+    public float min;
     private float distance; 
 
     // Start is called once before the first execution of Update after the MonoBehavior is created
@@ -24,8 +24,9 @@ public class Enemy : MonoBehaviour
 
         direction = direction.normalized;
 
-        transform.position = Vector2.MoveTowards(this.transform.position , player.transform.position, speed * Time.deltaTime);
-
+        if(distance > dis && distance < min) {
+            transform.position = Vector2.MoveTowards(this.transform.position , player.transform.position, speed * Time.deltaTime);
+        }
 
     }
 }
