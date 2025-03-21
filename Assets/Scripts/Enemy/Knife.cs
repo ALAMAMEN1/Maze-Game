@@ -2,43 +2,94 @@ using UnityEngine;
 
 public class Knife : MonoBehaviour
 {
+    [Header("References")]
     public GameObject player;
     public GameObject goblin;
-    public float speed;
-    public bool startAtt;
+    
+    [Header("Settings")]
+    public float speed = 10f;
+    public bool startAtt = false;
 
-    bool isEnter;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Collision Settings")]
+    public LayerMask collisionLayers;
+
+    private Vector3 movementDirection;
+    private bool isMoving = false;
+    private bool hasCollided = false;
+    private Rigidbody2D rb;
+
     void Start()
     {
-        isEnter = false;
+        rb = GetComponent<Rigidbody2D>();
+        rb.isKinematic = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(startAtt) {
-            transform.position = Vector3.MoveTowards(this.transform.position , player.transform.position, speed * Time.deltaTime);
-        }
-        if(isEnter) {
-            gameObject.SetActive(false);
-            transform.position = goblin.transform.position;
+        HandleMovement();
+        RotateKnife();
+    }
+
+    void HandleMovement()
+    {
+        if (startAtt && !isMoving && !hasCollided)
+        {
+            InitializeAttack();
         }
 
+        if (isMoving && !hasCollided)
+        {
+            MoveKnife();
+        }
+        else if (hasCollided)
+        {
+            ResetKnifePosition();
+        }
+    }
+
+    void InitializeAttack()
+    {
+        movementDirection = (player.transform.position - transform.position).normalized;
+        isMoving = true;
+        startAtt = false;
+    }
+
+    void MoveKnife()
+    {
+        rb.linearVelocity = movementDirection * speed;
+    }
+
+    void RotateKnife()
+    {
+        if (isMoving)
+        {
+            float angle = Mathf.Atan2(movementDirection.y, movementDirection.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
+
+    void ResetKnifePosition()
+    {
+        rb.linearVelocity = Vector2.zero;
+        transform.position = goblin.transform.position;
+        transform.rotation = Quaternion.identity;
+        isMoving = false;
+        hasCollided = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player") {
-            isEnter = true;
+        if (other.CompareTag("Player") || other.CompareTag("wall"))
+        {
+            HandleCollision();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    
+
+    void HandleCollision()
     {
-        if(other.gameObject.tag == "Player") {
-            isEnter = false;
-            gameObject.SetActive(true);
-        }
+        hasCollided = true;
+        
     }
 }

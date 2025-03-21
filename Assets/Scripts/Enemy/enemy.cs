@@ -35,15 +35,17 @@ public class Enemy : MonoBehaviour
         }else if(distance < stopDistance) {
             Knife.startAtt = false;
 			animator.SetBool("play" , false);
+        }else{
+            animator.SetBool("play" , false);
         }
 
 
 
 		if(direction.x < 0 && facingRight) {
 			Flip();
-		} else{
-			Flip();
-		}
+        } else if(direction.x > 0 && !facingRight) {
+            Flip();
+        }
     }
 
 
