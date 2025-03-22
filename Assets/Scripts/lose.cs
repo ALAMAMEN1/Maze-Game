@@ -10,6 +10,7 @@ using System.Collections;
 
 public class Lose : MonoBehaviour
 {
+    public BoxCollider2D boxCollider2D;
     public GameObject isTrigger;
     //public AudioSource audioSource; 
     public bool isEnter;
@@ -23,21 +24,13 @@ public class Lose : MonoBehaviour
     {
        isEnter = false;
        isTrigger.SetActive(true);
+        StartCoroutine(noLose());
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (isEnter)
-        {
-            rigdbody2D.linearVelocity = new UnityEngine.Vector2(-0.2f, 0);
-            spriteRender.color = new Color(1f, 0.325f, 0.325f);
-            player.health -= 2;
-            isEnter = false;
-            StartCoroutine(StopMove(1f));
-        }
-       
+    void Update(){
     }
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -56,10 +49,20 @@ public class Lose : MonoBehaviour
         }
     }
 
+    private void loseHandel(){
+        if (isEnter)
+        {
+            rigdbody2D.linearVelocity = new UnityEngine.Vector2(-0.2f, 0);
+            rigdbody2D.linearVelocity = new UnityEngine.Vector2(-0.2f, 0);
+            player.health -= 20;
+            isEnter = false;
+            StartCoroutine(StopMove(1f));
+        }
+    }
 
 
 
-    public IEnumerator StopMove(float time)
+    private IEnumerator StopMove(float time)
     {
         
             player.stop = true;
@@ -68,6 +71,15 @@ public class Lose : MonoBehaviour
             spriteRender.color = new Color(1f, 1f, 1f);
             player.stop = false;        
     }
+
+    private IEnumerator noLose(){
+        boxCollider2D.enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        boxCollider2D.enabled = true;
+        loseHandel();
+        StartCoroutine(noLose());
+    }
+
 
 
 }

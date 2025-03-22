@@ -3,6 +3,7 @@ using System.Collections;
 public class playerHit : MonoBehaviour
 {
     private bool isEnter;
+    [Header("References")]
     public SpriteRenderer spriteRender;
     public Player player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created

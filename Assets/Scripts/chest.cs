@@ -53,22 +53,25 @@ public class Chest : MonoBehaviour
     private IEnumerator DeactivateKeyWithDelay()
     {
         yield return new WaitForSeconds(2f);
+        keyAnimator.SetBool("play", false);
         key.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("trigger");
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             isEnter = true;
+            text.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             isEnter = false;
+            text.SetActive(false);
         }
     }
 }
