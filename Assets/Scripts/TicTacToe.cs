@@ -21,13 +21,14 @@ public class TicTacToe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isEnter && player.lastPiece)
+        if (isEnter && player.lastPiece && Input.GetKeyDown(KeyCode.E))
         {
 
             lastPiece.SetActive(true);
             isEnter = false;
             Key.SetActive(true);
             animator.SetBool("play", true);
+            player.key = true;
             StartCoroutine(DeactivateKeyWithDelay());
 
         }

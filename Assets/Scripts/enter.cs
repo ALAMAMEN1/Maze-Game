@@ -15,6 +15,8 @@ public class enter : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
+        isTrigger.SetActive(true);
+        //audioSource = GetComponent<AudioSource>();
         isEnter = false; 
     }
 
