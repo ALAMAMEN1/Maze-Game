@@ -7,7 +7,7 @@ public class Open : MonoBehaviour
     public GameObject door;
     public GameObject trigger;    
     public Animator doorAnimator;
-    public Player player;
+    public PlayerObject player;
     
     BoxCollider2D collider;
     bool isEnter;
