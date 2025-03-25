@@ -28,7 +28,7 @@ public class TicTacToe : MonoBehaviour
             isEnter = false;
             Key.SetActive(true);
             animator.SetBool("play", true);
-            player.key = true;
+            player.getObj(1);
             StartCoroutine(DeactivateKeyWithDelay());
 
         }

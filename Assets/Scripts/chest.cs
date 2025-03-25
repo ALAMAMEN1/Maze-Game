@@ -31,6 +31,7 @@ public class Chest : MonoBehaviour
 
     private void OpenChest()
     {
+        Debug.Log("OpenChest called");
         if (!isOpen)
         {
             isOpen = true;
@@ -43,36 +44,47 @@ public class Chest : MonoBehaviour
 
             key.SetActive(true);
             keyAnimator.SetBool("play", true);
-            triggerObject.SetActive(false);
-            text.SetActive(false);
-            getObject.getObj(numberOfItem);
-            Debug.Log("Starting Coroutine");
+
+            if (text != null)
+            {
+                text.SetActive(false);
+            }
+            
+
+            if (getObject != null)
+            {
+                getObject.getObj(numberOfItem);
+            }
+            
+
             StartCoroutine(DeactivateKeyWithDelay());
 
             isEnter = false;
+        }
+        else
+        {
         }
     }
 
     private IEnumerator DeactivateKeyWithDelay()
     {
-        Debug.Log("Coroutine started");
         yield return new WaitForSeconds(2f);
-        Debug.Log("After 2 seconds");
 
         if (keyAnimator == null)
         {
-            Debug.LogError("keyAnimator is null!");
             yield break; // أوقف التنفيذ
         }
 
         keyAnimator.SetBool("play", false);
         key.SetActive(false);
+        triggerObject.SetActive(false);
+        isOpen = true;
+
     }
 
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("trigger");
         if (other.CompareTag("Player"))
         {
             isEnter = true;

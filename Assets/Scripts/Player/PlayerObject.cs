@@ -8,13 +8,26 @@ public class PlayerObject : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        lastPiece = false;
         key = false;
+        lastPiece = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+
+    public void getObj(int number)
+    {
+        if (number == 1)
+        {
+            key = true;
+        }
+        else if (number == 2)
+        {
+            lastPiece = true;
+        }
     }
 }
