@@ -108,6 +108,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -234,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Health_04_Heart_Yellow_0: -2355984162507441903
+      Health_04_Heart_Yellow_1: 524838272137975348
+      Health_04_Heart_Yellow_2: 2360445294562698785
+      Health_04_Heart_Yellow_3: 1584492271111057662
+      Health_04_Heart_Yellow_4: 2103213114749053664
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
