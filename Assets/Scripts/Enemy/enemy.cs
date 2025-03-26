@@ -16,24 +16,29 @@ public class Enemy : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
-        KnifeObject.SetActive(false);
+        if(KnifeObject != null)KnifeObject.SetActive(false);
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            Debug.LogError("Player is not assigned in the Enemy script.");
+            return;
+        }
         distance = Vector2.Distance(transform.position , player.transform.position);
         Vector2 direction =  player.transform.position - transform.position;
 
         direction = direction.normalized;
         if(distance > stopDistance && distance < minDistance) {
-            KnifeObject.SetActive(true);
+            if(KnifeObject != null)KnifeObject.SetActive(true);
             transform.position = Vector2.MoveTowards(this.transform.position , player.transform.position, speed * Time.deltaTime);
             animator.SetBool("play" , true);
-            Knife.startAtt = true;
+            if(Knife != null)Knife.startAtt = true;
         }else if(distance < stopDistance) {
-            Knife.startAtt = false;
+            if(Knife != null)Knife.startAtt = false;
 			animator.SetBool("play" , false);
         }else{
             animator.SetBool("play" , false);
