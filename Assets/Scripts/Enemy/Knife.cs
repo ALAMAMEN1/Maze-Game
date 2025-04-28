@@ -29,7 +29,6 @@ public class Knife : MonoBehaviour
         HandleMovement();
         RotateKnife();
     }
-
     void HandleMovement()
     {
         if (startAtt && !isMoving && !hasCollided)
@@ -84,8 +83,6 @@ public class Knife : MonoBehaviour
             HandleCollision();
         }
     }
-
-    
 
     void HandleCollision()
     {
