@@ -537,7 +537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -70.7, y: 0.0000019073486}
+  m_AnchoredPosition: {x: -70.70001, y: 0}
   m_SizeDelta: {x: -155.1515, y: -14.5947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234656185
@@ -3070,7 +3070,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1690711829}
-  trigger: {fileID: 1101505278}
 --- !u!58 &1101505283
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3431,7 +3430,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 19.0027, y: 5.3500004}
+  m_AnchoredPosition: {x: 19.002686, y: 5.350006}
   m_SizeDelta: {x: -50.859802, y: -35.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1319806813
@@ -5568,7 +5567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boxCollider2D: {fileID: 1775855861}
   isTrigger: {fileID: 1775855859}
-  isEnter: 0
+  isEnter: 1
   rigdbody2D: {fileID: 919928341}
   spriteRender: {fileID: 919928339}
   player: {fileID: 919928340}

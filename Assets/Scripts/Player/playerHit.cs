@@ -38,7 +38,7 @@ public class playerHit : MonoBehaviour
 
     public IEnumerator StopTime(float time)
     {
-            player.health -= 20;
+            player.health -= 12;
             yield return new WaitForSeconds(time);
             spriteRender.color = new Color(1f, 1f, 1f);
     }

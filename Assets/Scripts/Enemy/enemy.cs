@@ -34,7 +34,8 @@ public class Enemy : MonoBehaviour
         direction = direction.normalized;
         if(distance > stopDistance && distance < minDistance) {
             if(KnifeObject != null)KnifeObject.SetActive(true);
-            transform.position = Vector2.MoveTowards(this.transform.position , player.transform.position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(this.transform.position
+                , player.transform.position, speed * Time.deltaTime);
             animator.SetBool("play" , true);
             if(Knife != null)Knife.startAtt = true;
         }else if(distance < stopDistance) {
