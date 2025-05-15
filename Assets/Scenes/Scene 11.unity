@@ -25536,7 +25536,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 621845730}
 --- !u!95 &621845732
 Animator:
   serializedVersion: 7
@@ -29163,7 +29162,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 940895125}
 --- !u!95 &940895127
 Animator:
   serializedVersion: 7
@@ -30623,7 +30621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1157763812}
 --- !u!95 &1157763814
 Animator:
   serializedVersion: 7
@@ -30905,7 +30902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1167379428}
 --- !u!95 &1167379430
 Animator:
   serializedVersion: 7
@@ -31499,7 +31495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1215382704}
 --- !u!95 &1215382706
 Animator:
   serializedVersion: 7
@@ -32634,7 +32629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1316996317}
 --- !u!95 &1316996319
 Animator:
   serializedVersion: 7
@@ -33046,7 +33040,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1353290259}
 --- !u!95 &1353290261
 Animator:
   serializedVersion: 7
@@ -33452,6 +33445,9 @@ MonoBehaviour:
   key: 0
   speed: 0.6
   stop: 0
+  dashDistance: 0.5
+  dashDuration: 0.2
+  dashCooldown: 1
   sowrd: {fileID: 831963586}
   eff: {fileID: 1572237430}
   sowrdAnimator: {fileID: 831963587}
@@ -40240,7 +40236,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1658156975}
 --- !u!95 &1658156977
 Animator:
   serializedVersion: 7
@@ -41213,7 +41208,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1725069155}
 --- !u!95 &1725069157
 Animator:
   serializedVersion: 7
@@ -41882,6 +41876,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1851385889}
   - component: {fileID: 1851385888}
+  - component: {fileID: 1851385891}
+  - component: {fileID: 1851385890}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -41920,6 +41916,78 @@ Transform:
   - {fileID: 1604949191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!66 &1851385890
+CompositeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851385887}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_GeometryType: 0
+  m_GenerationType: 0
+  m_EdgeRadius: 0
+  m_ColliderPaths: []
+  m_CompositePaths:
+    m_Paths: []
+  m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.00005
+  m_UseDelaunayMesh: 0
+  m_CompositeGameObject: {fileID: 1851385887}
+--- !u!50 &1851385891
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851385887}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1854174846
 GameObject:
   m_ObjectHideFlags: 0
@@ -42503,7 +42571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1890472443}
 --- !u!95 &1890472445
 Animator:
   serializedVersion: 7
