@@ -2244,6 +2244,9 @@ MonoBehaviour:
   key: 0
   speed: 0.6
   stop: 0
+  dashDistance: 0.9
+  dashDuration: 0.2
+  dashCooldown: 1
   sowrd: {fileID: 1101505278}
   eff: {fileID: 449050879}
   sowrdAnimator: {fileID: 1101505281}
@@ -2309,7 +2312,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.05}
+  m_Offset: {x: -0.0012481809, y: -0.038978126}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2319,7 +2322,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.1, y: 0.04}
+  m_Size: {x: 0.1423899, y: 0.06204375}
   m_EdgeRadius: 0
 --- !u!114 &919928343
 MonoBehaviour:
@@ -3069,7 +3072,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19876c056f4e7f2cafd6d851f7cf39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 1690711829}
 --- !u!58 &1101505283
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4411,7 +4413,7 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_CompositeOperation: 1
+  m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
@@ -4455,90 +4457,9 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1482011488}
-    m_ColliderPaths:
-    - - X: -14399998
-        Y: 12800001
-      - X: -19200000
-        Y: 12800001
-      - X: -19200000
-        Y: 11200000
-      - X: -14399998
-        Y: 11200000
-    - - X: -8000000
-        Y: 12800001
-      - X: -11200000
-        Y: 12800001
-      - X: -11200000
-        Y: 11200000
-      - X: -8000000
-        Y: 11200000
-    - - X: -4800000
-        Y: 12800001
-      - X: -7999999
-        Y: 12800001
-      - X: -7999999
-        Y: 11200000
-      - X: -4800000
-        Y: 11200000
-    - - X: 4799999
-        Y: 9599999
-      - X: -4799999
-        Y: 9599999
-      - X: -4799999
-        Y: 7999999
-      - X: 4799999
-        Y: 7999999
-    - - X: 9599999
-        Y: 9599999
-      - X: 4800000
-        Y: 9599999
-      - X: 4800000
-        Y: 7999999
-      - X: 9599999
-        Y: 7999999
-    - - X: 9599999
-        Y: 4799999
-      - X: 4800000
-        Y: 4799999
-      - X: 4800000
-        Y: 3200000
-      - X: 9599999
-        Y: 3200000
-    - - X: -3200000
-        Y: -700000
-      - X: -3200000
-        Y: 0
-      - X: -4799999
-        Y: 0
-      - X: -4799999
-        Y: -1600000
-      - X: -3899999
-        Y: -1600000
+  m_ColliderPaths: []
   m_CompositePaths:
-    m_Paths:
-    - - {x: -0.4800293, y: 1.12}
-      - {x: -0.4800293, y: 1.2800001}
-      - {x: -1.12, y: 1.2799708}
-      - {x: -1.1199707, y: 1.12}
-    - - {x: -1.4400291, y: 1.12}
-      - {x: -1.4400291, y: 1.2800001}
-      - {x: -1.9200001, y: 1.2799708}
-      - {x: -1.9199709, y: 1.12}
-    - - {x: 0.9599706, y: 0.7999999}
-      - {x: 0.9599706, y: 0.9599999}
-      - {x: -0.4799999, y: 0.9599706}
-      - {x: -0.4799706, y: 0.7999999}
-    - - {x: 0.9599706, y: 0.32}
-      - {x: 0.9599706, y: 0.4799999}
-      - {x: 0.48000002, y: 0.4799706}
-      - {x: 0.4800293, y: 0.32}
-    - - {x: -0.3900127, y: -0.16}
-      - {x: -0.32, y: -0.0699912}
-      - {x: -0.32002932, y: 0}
-      - {x: -0.4799999, y: -0.000029300001}
-      - {x: -0.4799706, y: -0.16}
+    m_Paths: []
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
