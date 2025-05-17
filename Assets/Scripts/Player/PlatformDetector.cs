@@ -22,7 +22,6 @@ public class PlatformDetector : MonoBehaviour
 
     public void OnDeviceTypeReceived(string deviceType)
     {
-        Debug.Log("✅ الجهاز المكتشف: " + deviceType);
 
         if (deviceType == "desktop")
         {
