@@ -43386,8 +43386,11 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+<<<<<<< HEAD
 =======
 >>>>>>> parent of c58fa15 (scene 11)
+=======
+>>>>>>> cf31daa30efd423d3a132b0e3c584d2a995b9480
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
