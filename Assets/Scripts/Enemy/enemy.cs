@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
     {
         if (player == null)
         {
-            Debug.LogError("Player is not assigned in the Enemy script.");
             return;
         }
         distance = Vector2.Distance(transform.position , player.transform.position);

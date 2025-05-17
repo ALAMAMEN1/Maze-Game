@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -26,10 +27,13 @@ public class Player : MonoBehaviour
     public Animator sowrdAnimator;
     public Animator effAnimator;
 
-    // For boundary checking
     private Collider2D mapBoundsCollider;
     private float playerWidth;
     private float playerHeight;
+
+    public Joystick joystick;
+    public Button dashButton;
+    public Button attackButton;
 
     void Start()
     {
@@ -40,7 +44,12 @@ public class Player : MonoBehaviour
         sowrd.SetActive(false);
         eff.SetActive(false);
 
-        // Initialize boundary checking
+        if (dashButton != null)
+            dashButton.onClick.AddListener(OnDashButtonPressed);
+
+        if (attackButton != null)
+            attackButton.onClick.AddListener(OnAttackButtonPressed);
+
         mapBoundsCollider = GameObject.FindGameObjectWithTag("MapBounds").GetComponent<Collider2D>();
         var playerCollider = GetComponent<Collider2D>();
         playerWidth = playerCollider.bounds.extents.x;
@@ -49,8 +58,17 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        speedX = Input.GetAxis("Horizontal");
-        speedY = Input.GetAxis("Vertical");
+        float inputX = joystick != null ? joystick.Horizontal : 0;
+        float inputY = joystick != null ? joystick.Vertical : 0;
+
+        if (Mathf.Abs(inputX) < 0.1f)
+            inputX = Input.GetAxis("Horizontal");
+
+        if (Mathf.Abs(inputY) < 0.1f)
+            inputY = Input.GetAxis("Vertical");
+
+        speedX = inputX;
+        speedY = inputY;
 
         if (speedX != 0 || speedY != 0)
         {
@@ -70,15 +88,9 @@ public class Player : MonoBehaviour
             Flip();
         }
 
-        if (health <= 0) 
+        if (health <= 0)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        // Dash input
-        if (Input.GetKeyDown(KeyCode.Space) && canDash && (speedX != 0 || speedY != 0))
-        {
-            StartCoroutine(Dash());
         }
 
         if (!isDashing && !stop)
@@ -87,65 +99,68 @@ public class Player : MonoBehaviour
             rb.linearVelocity = ConstrainVelocityToMapBounds(newVelocity);
         }
 
-        if(Input.GetKeyDown(KeyCode.F)) {
-            sowrd.SetActive(true);
-            eff.SetActive(true);
-            sowrdAnimator.SetBool("play", true);
-            effAnimator.SetBool("play", true);
-            StartCoroutine(DeactivateAttWithDelay());
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnDashButtonPressed();
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            OnAttackButtonPressed();
+        }
+    }
+
+    public void OnDashButtonPressed()
+    {
+        if (canDash && (speedX != 0 || speedY != 0))
+        {
+            StartCoroutine(Dash());
+        }
+    }
+
+    public void OnAttackButtonPressed()
+    {
+        sowrd.SetActive(true);
+        eff.SetActive(true);
+        sowrdAnimator.SetBool("play", true);
+        effAnimator.SetBool("play", true);
+        StartCoroutine(DeactivateAttWithDelay());
     }
 
     private IEnumerator Dash()
     {
         canDash = false;
         isDashing = true;
-        
-        // Store the dash direction based on input
+
         dashDirection = new Vector2(speedX, speedY).normalized;
-        
-        // Apply dash force
+
         float dashSpeed = dashDistance / dashDuration;
         Vector2 dashVelocity = dashDirection * dashSpeed;
         rb.linearVelocity = ConstrainVelocityToMapBounds(dashVelocity);
-        
-        // Optional: Add visual effects for dash
+
         animator.SetTrigger("dash");
-        
+
         yield return new WaitForSeconds(dashDuration);
-        
+
         isDashing = false;
-        rb.linearVelocity = Vector2.zero; // Reset velocity after dash
-        
+        rb.linearVelocity = Vector2.zero;
+
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
     }
 
-    // New method to constrain movement within map bounds
     private Vector2 ConstrainVelocityToMapBounds(Vector2 velocity)
     {
         if (mapBoundsCollider == null)
             return velocity;
 
         Vector3 newPosition = transform.position + (Vector3)velocity * Time.deltaTime;
-        
-        // Get the bounds of the map collider
+
         Bounds bounds = mapBoundsCollider.bounds;
-        
-        // Clamp the new position within map bounds (considering player size)
-        newPosition.x = Mathf.Clamp(
-            newPosition.x, 
-            bounds.min.x + playerWidth, 
-            bounds.max.x - playerWidth
-        );
-        
-        newPosition.y = Mathf.Clamp(
-            newPosition.y, 
-            bounds.min.y + playerHeight, 
-            bounds.max.y - playerHeight
-        );
-        
-        // Return the constrained velocity
+
+        newPosition.x = Mathf.Clamp(newPosition.x, bounds.min.x + playerWidth, bounds.max.x - playerWidth);
+        newPosition.y = Mathf.Clamp(newPosition.y, bounds.min.y + playerHeight, bounds.max.y - playerHeight);
+
         return (newPosition - transform.position) / Time.deltaTime;
     }
 
@@ -156,7 +171,7 @@ public class Player : MonoBehaviour
         eff.SetActive(false);
     }
 
-    void Flip()
+    private void Flip()
     {
         facingRight = !facingRight;
         Vector3 scale = transform.localScale;
