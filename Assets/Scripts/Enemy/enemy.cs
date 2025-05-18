@@ -1,65 +1,77 @@
 using UnityEngine;
 using System.Collections;
+
 public class Enemy : MonoBehaviour
 {
-
     public GameObject player;
     public GameObject KnifeObject;
     public float speed;
     public float stopDistance;
     public float minDistance;
     public Knife Knife;
+
     private float distance;
     private Animator animator;
-	bool facingRight = true;
+    private bool facingRight = true;
 
-    // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
-        if(KnifeObject != null)KnifeObject.SetActive(false);
+        if (KnifeObject != null)
+            KnifeObject.SetActive(false);
+
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player == null)
-        {
             return;
+
+        distance = Vector2.Distance(transform.position, player.transform.position);
+        Vector2 direction = (player.transform.position - transform.position).normalized;
+
+        // حركة العدو نحو اللاعب مع الحفاظ على قيمة Z الأصلية
+        if (distance > stopDistance && distance < minDistance)
+        {
+            if (KnifeObject != null)
+                KnifeObject.SetActive(true);
+
+            Vector3 targetPosition = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            targetPosition.z = transform.position.z; // تثبيت الـ Z
+            transform.position = targetPosition;
+
+            animator.SetBool("play", true);
+            if (Knife != null)
+                Knife.startAtt = true;
         }
-        distance = Vector2.Distance(transform.position , player.transform.position);
-        Vector2 direction =  player.transform.position - transform.position;
+        else if (distance <= stopDistance)
+        {
+            if (Knife != null)
+                Knife.startAtt = false;
 
-        direction = direction.normalized;
-        if(distance > stopDistance && distance < minDistance) {
-            if(KnifeObject != null)KnifeObject.SetActive(true);
-            transform.position = Vector2.MoveTowards(this.transform.position
-                , player.transform.position, speed * Time.deltaTime);
-            animator.SetBool("play" , true);
-            if(Knife != null)Knife.startAtt = true;
-        }else if(distance < stopDistance) {
-            if(Knife != null)Knife.startAtt = false;
-			animator.SetBool("play" , false);
-        }else{
-            animator.SetBool("play" , false);
+            animator.SetBool("play", false);
+        }
+        else
+        {
+            animator.SetBool("play", false);
         }
 
-
-
-		if(direction.x < 0 && facingRight) {
-			Flip();
-        } else if(direction.x > 0 && !facingRight) {
+        // التقليب حسب اتجاه الحركة
+        if (direction.x < 0 && facingRight)
+        {
+            Flip();
+        }
+        else if (direction.x > 0 && !facingRight)
+        {
             Flip();
         }
     }
 
-
-	void Flip()
+    void Flip()
     {
         facingRight = !facingRight;
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
     }
-
 }
