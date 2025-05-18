@@ -313,7 +313,8 @@ Transform:
   m_LocalPosition: {x: 0.75406456, y: 0.8398931, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 316581956}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &125962468
@@ -656,11 +657,11 @@ Transform:
   m_GameObject: {fileID: 316581954}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.6552175, y: 1.0779221, z: 0}
+  m_LocalPosition: {x: -2.4092822, y: 0.238029, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 31531330}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &414255693
 GameObject:
@@ -2251,6 +2252,9 @@ MonoBehaviour:
   eff: {fileID: 449050879}
   sowrdAnimator: {fileID: 1101505281}
   effAnimator: {fileID: 449050880}
+  joystick: {fileID: 0}
+  dashButton: {fileID: 0}
+  attackButton: {fileID: 0}
 --- !u!50 &919928341
 Rigidbody2D:
   serializedVersion: 5
@@ -8145,7 +8149,6 @@ SceneRoots:
   - {fileID: 31531330}
   - {fileID: 1712982281}
   - {fileID: 1986631399}
-  - {fileID: 316581956}
   - {fileID: 414255695}
   - {fileID: 482214391}
   - {fileID: 1345573863}
