@@ -30,14 +30,13 @@ public class Enemy : MonoBehaviour
         distance = Vector2.Distance(transform.position, player.transform.position);
         Vector2 direction = (player.transform.position - transform.position).normalized;
 
-        // حركة العدو نحو اللاعب مع الحفاظ على قيمة Z الأصلية
         if (distance > stopDistance && distance < minDistance)
         {
             if (KnifeObject != null)
                 KnifeObject.SetActive(true);
 
             Vector3 targetPosition = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            targetPosition.z = transform.position.z; // تثبيت الـ Z
+            targetPosition.z = transform.position.z; 
             transform.position = targetPosition;
 
             animator.SetBool("play", true);
@@ -56,7 +55,6 @@ public class Enemy : MonoBehaviour
             animator.SetBool("play", false);
         }
 
-        // التقليب حسب اتجاه الحركة
         if (direction.x < 0 && facingRight)
         {
             Flip();
