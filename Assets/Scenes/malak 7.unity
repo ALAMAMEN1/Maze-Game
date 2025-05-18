@@ -60886,16 +60886,17 @@ MonoBehaviour:
   health: 0
   key: 0
   speed: 0.6
-  speedX: 0
-  speedY: 0
-  rb: {fileID: 0}
-  animator: {fileID: 0}
   stop: 0
-  facingRight: 1
+  dashDistance: 0.5
+  dashDuration: 0.2
+  dashCooldown: 1
   sowrd: {fileID: 2017016791}
   eff: {fileID: 155599874}
   sowrdAnimator: {fileID: 2017016792}
   effAnimator: {fileID: 155599875}
+  joystick: {fileID: 0}
+  dashButton: {fileID: 0}
+  attackButton: {fileID: 0}
 --- !u!50 &1148401526
 Rigidbody2D:
   serializedVersion: 5
@@ -63602,7 +63603,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 0.6
+  orthographic size: 0.8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
