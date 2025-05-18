@@ -6,6 +6,7 @@ public class PlatformDetector : MonoBehaviour
     public GameObject joystick;
     public GameObject dashButton;
     public GameObject attackButton;
+    public GameObject ButtonE;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class PlatformDetector : MonoBehaviour
             if (joystick) Destroy(joystick);
             if (dashButton) Destroy(dashButton);
             if (attackButton) Destroy(attackButton);
+            if (ButtonE) Destroy(ButtonE);
         }
     }
 }

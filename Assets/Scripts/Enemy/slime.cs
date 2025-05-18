@@ -31,10 +31,8 @@ public class slime : MonoBehaviour
 
         if (distance > stopDistance && distance < minDistance) 
         {
-            // حفظ قيمة z الأصلية
             float originalZ = transform.position.z;
             
-            // تحريك الكائن على المحورين X و Y فقط
             transform.position = Vector2.MoveTowards(
                 new Vector2(transform.position.x, transform.position.y),
                 new Vector2(player.transform.position.x, player.transform.position.y),
