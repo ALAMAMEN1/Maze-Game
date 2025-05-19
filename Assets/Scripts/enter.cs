@@ -1,43 +1,54 @@
-using System.Threading.Tasks;
-using System;
-using System.Globalization;
-using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class enter : MonoBehaviour
 {
     public GameObject isTrigger;
+    public Animator transitionAnimator;
+    public float transitionTime = 0.3f;
+    public CanvasGroup transitionCanvasGroup;
 
-    public bool isEnter;
+    private bool isEnter;
 
-    // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
         isTrigger.SetActive(true);
-        isEnter = false; 
+        isEnter = false;
+
+        if (transitionCanvasGroup != null)
+        {
+            transitionCanvasGroup.blocksRaycasts = false;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isEnter)
         {
-           
-                 
-                isTrigger.SetActive(false);
-                isEnter = false;
+            isEnter = false;
+            StartCoroutine(LoadNextScene());
+        }
+    }
 
-                int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-                if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
-                {
-                    SceneManager.LoadScene(nextSceneIndex);
-                }
-                else
-                {
-                    Debug.Log("No more scenes to load.");
-                }
-            
+    IEnumerator LoadNextScene()
+    {
+        if (transitionCanvasGroup != null)
+        {
+            transitionCanvasGroup.blocksRaycasts = true;
+        }
+
+        if (transitionAnimator != null)
+        {
+            transitionAnimator.SetTrigger("Start");
+            yield return new WaitForSeconds(transitionTime);
+        }
+
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
         }
     }
 
