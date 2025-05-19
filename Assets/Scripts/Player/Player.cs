@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public GameObject eff;
     public Animator sowrdAnimator;
     public Animator effAnimator;
-
+ 
     [Header("References")]
     private Rigidbody2D rb;
     private Animator animator;
