@@ -17,6 +17,7 @@ public class slime : MonoBehaviour
     private float distance;
     private Animator animator;
     private AudioSource audioSource;
+    private Rigidbody2D rb;
 
     private bool facingRight = true;
     private bool isMoving = false;
@@ -25,6 +26,7 @@ public class slime : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        rb = GetComponent<Rigidbody2D>();
 
         if (player == null)
         {
@@ -43,7 +45,7 @@ public class slime : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (player == null) return;
 
@@ -52,7 +54,9 @@ public class slime : MonoBehaviour
 
         if (distance > stopDistance && distance < minDistance)
         {
-            MoveTowardsPlayer();
+            Vector2 targetPos = rb.position + direction * speed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPos);
+
             HandleAnimation(true);
             HandleWalkSound(true);
         }
@@ -66,19 +70,6 @@ public class slime : MonoBehaviour
         {
             Flip();
         }
-    }
-
-    void MoveTowardsPlayer()
-    {
-        float originalZ = transform.position.z;
-
-        transform.position = Vector2.MoveTowards(
-            new Vector2(transform.position.x, transform.position.y),
-            new Vector2(player.transform.position.x, player.transform.position.y),
-            speed * Time.deltaTime
-        );
-
-        transform.position = new Vector3(transform.position.x, transform.position.y, originalZ);
     }
 
     void HandleAnimation(bool moving)
