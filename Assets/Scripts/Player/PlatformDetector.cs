@@ -1,28 +1,29 @@
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlatformDetector : MonoBehaviour
 {
-    [Header("\uD83C\uDFAE Mobile Controls")]
+    [Header("🎮 Mobile Controls")]
     public GameObject joystick;
     public GameObject dashButton;
     public GameObject attackButton;
     public GameObject ButtonE;
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+    //[DllImport("__Internal")]
+    //private static extern void DetectDeviceType();
+#endif
+
     void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
-        Application.ExternalEval(@"
-            (function() {
-                var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                var deviceType = isMobile ? 'mobile' : 'desktop';
-                SendMessage('PlatformDetector', 'OnDeviceTypeReceived', deviceType);
-            })();
-        ");
+        //DetectDeviceType();
 #endif
     }
 
     public void OnDeviceTypeReceived(string deviceType)
     {
+        Debug.Log("Device Type: " + deviceType);
 
         if (deviceType == "desktop")
         {
