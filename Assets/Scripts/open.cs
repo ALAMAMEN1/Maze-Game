@@ -10,6 +10,10 @@ public class Open : MonoBehaviour
     public Animator doorAnimator;
     public PlayerObject player;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip openSound;
+
     private BoxCollider2D doorCollider;
     private bool isEnter = false;
     private bool isOpening = false;
@@ -21,13 +25,25 @@ public class Open : MonoBehaviour
         if (text != null) text.SetActive(false);
         if (trigger != null) trigger.SetActive(true);
         if (doorCollider != null) doorCollider.isTrigger = false;
+
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.GetComponent<PlayerObject>();
+            }
+        }
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         if (!isOpening && isEnter && player.key)
         {
-            if (InputManager.Instance != null && InputManager.Instance.ConsumeInteract())
+            if (InputManager.Instance != null && InputManager.Instance.ConsumeInteract(isEnter))
             {
                 StartCoroutine(OpenDoor());
             }
@@ -38,15 +54,21 @@ public class Open : MonoBehaviour
     {
         isOpening = true;
 
+        if (audioSource != null && openSound != null)
+        {
+            audioSource.PlayOneShot(openSound, 0.7f);
+        }
+
         if (doorAnimator != null)
         {
             doorAnimator.SetBool("open", true);
-        }
 
-        yield return new WaitForSeconds(0.6f);
+            
+            yield return null; 
+            AnimatorStateInfo stateInfo = doorAnimator.GetCurrentAnimatorStateInfo(0);
+            float animationLength = stateInfo.length;
+            yield return new WaitForSeconds(animationLength);
 
-        if (doorAnimator != null)
-        {
             doorAnimator.SetBool("open", false);
         }
 

@@ -9,28 +9,33 @@ public class TicTacToe : MonoBehaviour
     public Animator animator;
     public PlayerObject player;
 
-    bool isEnter = false;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool isEnter = false;
+
     void Start()
     {
         Key.SetActive(false);
         lastPiece.SetActive(false);
+
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.GetComponent<PlayerObject>();
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isEnter && player.lastPiece && Input.GetKeyDown(KeyCode.E))
+        if (isEnter && player.lastPiece && InputManager.Instance != null && InputManager.Instance.ConsumeInteract(isEnter))
         {
-
             lastPiece.SetActive(true);
-            isEnter = false;
             Key.SetActive(true);
             animator.SetBool("play", true);
             player.getObj(1);
             StartCoroutine(DeactivateKeyWithDelay());
-
+            isEnter = false;
         }
     }
 
@@ -48,6 +53,7 @@ public class TicTacToe : MonoBehaviour
             isEnter = true;
         }
     }
+
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

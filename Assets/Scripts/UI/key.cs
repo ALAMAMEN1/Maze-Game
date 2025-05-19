@@ -4,19 +4,35 @@ public class key : MonoBehaviour
 {
     public PlayerObject player;
     public GameObject keyImage;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public GameObject lastPieceImage;
+
     void Start()
     {
-        keyImage.SetActive(false);
+        if (keyImage != null)
+            keyImage.SetActive(false);
+
+        if (lastPieceImage != null)
+            lastPieceImage.SetActive(false);
+
+        if (player == null)
+        {
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
+            {
+                player = playerObj.GetComponent<PlayerObject>();
+            }
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (player.key)
-        {
-            keyImage.SetActive(true);
-        }
-        
+        if (player == null)
+            return;
+
+        if (keyImage != null)
+            keyImage.SetActive(player.key);
+
+        if (lastPieceImage != null)
+            lastPieceImage.SetActive(player.lastPiece);
     }
 }

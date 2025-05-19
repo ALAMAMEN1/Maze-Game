@@ -9,14 +9,12 @@ public class enter : MonoBehaviour
 {
     public GameObject isTrigger;
 
-    //public AudioSource audioSource; 
     public bool isEnter;
 
     // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
     {
         isTrigger.SetActive(true);
-        //audioSource = GetComponent<AudioSource>();
         isEnter = false; 
     }
 
@@ -28,7 +26,6 @@ public class enter : MonoBehaviour
            
                  
                 isTrigger.SetActive(false);
-                //audioSource.Play();
                 isEnter = false;
 
                 int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;

@@ -2,63 +2,106 @@ using UnityEngine;
 
 public class slime : MonoBehaviour
 {
+    [Header("References")]
     public GameObject player;
+
+    [Header("Movement Settings")]
     public float speed;
     public float stopDistance;
     public float minDistance;
+
+    [Header("Audio")]
+    public AudioClip walkSound;
+    [Range(0f, 1f)] public float walkVolume = 0.3f;
+
     private float distance;
     private Animator animator;
-    bool facingRight = true;
+    private AudioSource audioSource;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool facingRight = true;
+    private bool isMoving = false;
+
     void Start()
     {
         animator = GetComponent<Animator>();
-    }
+        audioSource = GetComponent<AudioSource>();
 
-    // Update is called once per frame
-    void Update()
-    {
         if (player == null)
         {
-            Debug.LogError("Player is not assigned in the Enemy script.");
-            return;
+            player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null)
+            {
+                Debug.LogError("Player object with tag 'Player' not found in the scene.");
+            }
         }
+
+        if (audioSource != null)
+        {
+            audioSource.loop = true;
+            audioSource.clip = walkSound;
+            audioSource.volume = walkVolume;
+        }
+    }
+
+    void Update()
+    {
+        if (player == null) return;
 
         distance = Vector2.Distance(transform.position, player.transform.position);
-        Vector2 direction = player.transform.position - transform.position;
-        direction = direction.normalized;
+        Vector2 direction = (player.transform.position - transform.position).normalized;
 
-        if (distance > stopDistance && distance < minDistance) 
+        if (distance > stopDistance && distance < minDistance)
         {
-            float originalZ = transform.position.z;
-            
-            transform.position = Vector2.MoveTowards(
-                new Vector2(transform.position.x, transform.position.y),
-                new Vector2(player.transform.position.x, player.transform.position.y),
-                speed * Time.deltaTime
-            );
-            
-            transform.position = new Vector3(transform.position.x, transform.position.y, originalZ);
-            
-            animator.SetBool("play", true);
-        }
-        else if (distance < stopDistance) 
-        {
-            animator.SetBool("play", false);
+            MoveTowardsPlayer();
+            HandleAnimation(true);
+            HandleWalkSound(true);
         }
         else
         {
-            animator.SetBool("play", false);
+            HandleAnimation(false);
+            HandleWalkSound(false);
         }
 
-        if (direction.x < 0 && facingRight) 
+        if ((direction.x < 0 && facingRight) || (direction.x > 0 && !facingRight))
         {
             Flip();
-        } 
-        else if (direction.x > 0 && !facingRight) 
+        }
+    }
+
+    void MoveTowardsPlayer()
+    {
+        float originalZ = transform.position.z;
+
+        transform.position = Vector2.MoveTowards(
+            new Vector2(transform.position.x, transform.position.y),
+            new Vector2(player.transform.position.x, player.transform.position.y),
+            speed * Time.deltaTime
+        );
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, originalZ);
+    }
+
+    void HandleAnimation(bool moving)
+    {
+        if (animator != null)
         {
-            Flip();
+            animator.SetBool("play", moving);
+        }
+    }
+
+    void HandleWalkSound(bool moving)
+    {
+        if (audioSource == null || walkSound == null) return;
+
+        if (moving && !isMoving)
+        {
+            isMoving = true;
+            audioSource.Play();
+        }
+        else if (!moving && isMoving)
+        {
+            isMoving = false;
+            audioSource.Stop();
         }
     }
 

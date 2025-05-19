@@ -1,5 +1,3 @@
- // وش فادت هذا السكربت راني مداير الهلث في player.cs
-
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +7,25 @@ public class Health : MonoBehaviour
     private Slider slider;
 
     void Start()
+{
+    slider = GetComponent<Slider>();
+
+    if (player == null)
     {
-        slider = GetComponent<Slider>();
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.GetComponent<Player>();
+        }
+    }
+
+    if (player != null)
+    {
         slider.maxValue = player.MAX_HEALTH;
         slider.value = player.MAX_HEALTH;
     }
+}
+
     
     void Update()
     {

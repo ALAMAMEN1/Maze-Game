@@ -18,11 +18,22 @@ public class Knife : MonoBehaviour
     private bool hasCollided = false;
     private Rigidbody2D rb;
 
-    void Start()
+   void Start()
+{
+    rb = GetComponent<Rigidbody2D>();
+    rb.isKinematic = true;
+
+    if (player == null)
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = true;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
+
+    if (goblin == null)
+    {
+        goblin = this.gameObject;
+    }
+}
+
 
     void Update()
     {

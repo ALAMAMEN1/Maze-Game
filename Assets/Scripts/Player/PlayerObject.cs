@@ -24,10 +24,12 @@ public class PlayerObject : MonoBehaviour
         if (number == 1)
         {
             key = true;
+            lastPiece = false;
         }
         else if (number == 2)
         {
             lastPiece = true;
+            key = false;
         }
     }
 }

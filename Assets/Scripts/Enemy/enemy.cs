@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,12 +9,19 @@ public class Enemy : MonoBehaviour
     public float minDistance;
     public Knife Knife;
 
+    public AudioSource backgroundAudioSource;
+
     private float distance;
     private Animator animator;
     private bool facingRight = true;
 
     void Start()
     {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+
         if (KnifeObject != null)
             KnifeObject.SetActive(false);
 
@@ -36,22 +42,18 @@ public class Enemy : MonoBehaviour
                 KnifeObject.SetActive(true);
 
             Vector3 targetPosition = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-            targetPosition.z = transform.position.z; 
+            targetPosition.z = transform.position.z;
             transform.position = targetPosition;
 
             animator.SetBool("play", true);
             if (Knife != null)
                 Knife.startAtt = true;
         }
-        else if (distance <= stopDistance)
+        else
         {
             if (Knife != null)
                 Knife.startAtt = false;
 
-            animator.SetBool("play", false);
-        }
-        else
-        {
             animator.SetBool("play", false);
         }
 
@@ -62,6 +64,23 @@ public class Enemy : MonoBehaviour
         else if (direction.x > 0 && !facingRight)
         {
             Flip();
+        }
+    }
+
+    void OnBecameVisible()
+    {
+        if (backgroundAudioSource != null && !backgroundAudioSource.isPlaying)
+        {
+            backgroundAudioSource.loop = true;
+            backgroundAudioSource.Play();
+        }
+    }
+
+    void OnBecameInvisible()
+    {
+        if (backgroundAudioSource != null && backgroundAudioSource.isPlaying)
+        {
+            backgroundAudioSource.Stop();
         }
     }
 

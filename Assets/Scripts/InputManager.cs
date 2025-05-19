@@ -30,13 +30,19 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public bool ConsumeInteract()
+    public bool ConsumeInteract(bool canInteract)
     {
-        if (isInteractPressed)
+        if (isInteractPressed && canInteract)
         {
             isInteractPressed = false;
             return true;
         }
+
+        if (!canInteract)
+        {
+            isInteractPressed = false;
+        }
+
         return false;
     }
 }

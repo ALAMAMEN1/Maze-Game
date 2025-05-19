@@ -21,11 +21,22 @@ public class Lose : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehavior is created
     void Start()
+{
+    isEnter = false;
+    isTrigger.SetActive(true);
+
+    if (player == null)
     {
-       isEnter = false;
-       isTrigger.SetActive(true);
-        StartCoroutine(noLose());
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+        {
+            player = playerObj.GetComponent<Player>();
+        }
     }
+
+    StartCoroutine(noLose());
+}
+
 
     // Update is called once per frame
     void Update(){

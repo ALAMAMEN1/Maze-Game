@@ -4,16 +4,23 @@ using System.Collections;
 
 public class Chest : MonoBehaviour
 {
-    public bool isOpen = false;
+    [Header("References")]
     public GameObject text;
     public GameObject key;
     public GameObject triggerObject;
     public getObject getObject;
-    public AudioSource audioSource;
-    public bool isEnter = false;
     public Animator animator;
     public Animator keyAnimator;
+    public AudioSource audioSource;
+
+    [Header("Audio")]
+    public AudioClip openChestSound;
+
+    [Header("Settings")]
     public int numberOfItem;
+
+    private bool isOpen = false;
+    private bool isEnter = false;
 
     void Start()
     {
@@ -24,26 +31,33 @@ public class Chest : MonoBehaviour
 
     void Update()
     {
-        if (isEnter && InputManager.Instance.ConsumeInteract())
+        if (!isOpen && isEnter)
         {
-            OpenChest();
+            if (InputManager.Instance != null && InputManager.Instance.ConsumeInteract(isEnter))
+            {
+                OpenChest();
+            }
         }
     }
 
     private void OpenChest()
     {
+        Debug.Log("OpenChest CALLED");
         if (isOpen) return;
 
         isOpen = true;
         animator.SetBool("isOpen", isOpen);
 
-        if (audioSource != null)
+        if (audioSource != null && openChestSound != null)
         {
-            audioSource.Play();
+            audioSource.PlayOneShot(openChestSound, 1.0f); // 1.0f تعني الحجم الكامل
         }
 
         key.SetActive(true);
-        keyAnimator.SetBool("play", true);
+        if (keyAnimator != null)
+        {
+            keyAnimator.SetBool("play", true);
+        }
 
         if (text != null)
         {
@@ -64,12 +78,11 @@ public class Chest : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        if (keyAnimator == null)
+        if (keyAnimator != null)
         {
-            yield break;
+            keyAnimator.SetBool("play", false);
         }
 
-        keyAnimator.SetBool("play", false);
         key.SetActive(false);
         triggerObject.SetActive(false);
         isOpen = true;
@@ -80,7 +93,8 @@ public class Chest : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isEnter = true;
-            text.SetActive(true);
+            if (text != null)
+                text.SetActive(true);
         }
     }
 
@@ -89,7 +103,8 @@ public class Chest : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isEnter = false;
-            text.SetActive(false);
+            if (text != null)
+                text.SetActive(false);
         }
     }
 }
